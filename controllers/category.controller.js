@@ -22,8 +22,23 @@ exports.create = (req,res)=>{
 }
 
 
+
 exports.findAll = (req, res) =>{
-        Category.findAll().then(categories =>{
+    const categoryName = req.query.name;
+
+    let promise ;
+    
+    if(categoryName){
+        promise = Category.findAll({
+            where : {
+                name : categoryName
+            }
+        });
+    }else{
+        promise = Category.findAll();
+    }
+
+        promise.then(categories =>{
             res.status(200).send(categories)
         }).catch(err =>{
             res.status(500).send({
@@ -34,11 +49,63 @@ exports.findAll = (req, res) =>{
 
 exports.findOne = (req,res)=>{
     const categoryId = req.params.id;
+   
     Category.findByPk(categoryId).then(categoryId =>{
-        res.status(201).send(categoryId);
+        res.status(200).send(categoryId);
     }).catch(err =>{
         res.status(500).send({
             message : "some internal error"
+        })
+    })
+}
+
+
+exports.update = (req,res)=>{
+
+    const category = {
+        name : req.body.name,
+        description : req.body.description
+    }
+
+    const categoryId = req.params.id;
+
+    Category.update(category,{
+        where : {id : categoryId},
+        returning : true
+    }).then(updatedCategory =>{
+       console.log(updatedCategory);
+       Category.findByPk(categoryId).then(categoryRes =>{
+        res.status(200).send(categoryRes);
+       }).catch(err =>{
+        res.status(500).send({
+            message : "Some internal error"
+        })
+       })
+       
+        
+    }).catch(err=>{
+        res.status(500).send({
+            message : "Some internal error"
+        })
+    })
+
+
+}
+
+
+exports.delete = (req, res) =>{
+    const categoryId = req.params.id;
+    Category.destroy({
+        where : {
+            id : categoryId
+        }
+    }).then(result =>{
+        res.status(200).send({
+            message : "Sucessfully deleted the message"
+        })
+    }).catch(err=>{
+        res.status(500).send({
+            message : "Some internal error"
         })
     })
 }

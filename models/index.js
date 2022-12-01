@@ -21,4 +21,5 @@ var db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.category = require('./category.model')(sequelize,Sequelize);
+db.product = require('./product.model')(sequelize, Sequelize);
 module.exports = db;

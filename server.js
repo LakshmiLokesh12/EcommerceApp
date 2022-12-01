@@ -21,7 +21,7 @@ db.sequelize.sync({force:true}).then(()=>{
 
 
 require('./routes/category.routes')(app);
-
+require('./routes/product.routes')(app);
 
 app.listen(process.env.PORT, ()=>{
     console.log("Application started on port no :",serverConfig.PORT);
