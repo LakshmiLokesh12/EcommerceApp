@@ -1,5 +1,5 @@
 # all these folders are ignored by git
-/node modules
+/node_modules
 
 #security file
 .env
