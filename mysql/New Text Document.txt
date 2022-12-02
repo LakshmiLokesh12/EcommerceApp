@@ -1,0 +1,8 @@
+show databases;
+create schema ecom_db;
+use ecom_db;
+show tables;
+select * from categories;
+desc categories;
+select * from products;
+desc products;
