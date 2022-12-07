@@ -27,6 +27,6 @@ Installation:
 
 Install the dependencies and devDependencies and start the server.
 
-cd EcommerceApp
-npm install
-node server.js
+-cd EcommerceApp
+-npm install
+-node server.js
