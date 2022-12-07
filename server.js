@@ -10,6 +10,9 @@ app.use(bodyParser.json());
 const db = require("./models");
 const Category = db.category;
 const Product = db.product;
+const Role = db.role;
+
+
 console.log(Category);
 
 //1 to many relation between category & products
@@ -48,14 +51,34 @@ function init() {
       console.log("categories are added");
     })
     .catch((err) => {
-      console.log("Error in initialising the categories", e.message);
+      console.log("Error in initialising the categories", err.message);
     });
+
+    Role.create ({
+      id :1,
+      name : "customer"
+    });
+
+    Role.create({
+      id : 2,
+      name : "admin"
+    });
+
+
+
+
+
+
+
+
 }
 
 //initialise routes
 
 require("./routes/category.routes")(app);
 require("./routes/product.routes")(app);
+require('./routes/auth.route')(app);
+
 
 app.listen(process.env.PORT, () => {
   console.log("Application started on port no :", serverConfig.PORT);
