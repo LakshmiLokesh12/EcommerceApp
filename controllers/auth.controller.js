@@ -1,11 +1,17 @@
 //
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { user} = require('../models');
+
 
 const db = require('../models');
+
 const User = db.user;
 const Role = db.roles;
 
 const Op = db.Sequelize.Op;
+const jwt = require('jsonwebtoken');
+const secretKey = require('../configs/secret.config.js');
+
 
 exports.signup = (req, res) => {
     
@@ -30,7 +36,7 @@ exports.signup = (req, res) => {
                 }
             }).then(roles=>{
 
-                User.setRoles(roles).then(()=>{
+                user.setRoles(roles).then(()=>{
                     console.log("registration completed")
                     res.status(201).send({
                         message : "User successfully registered"
@@ -42,7 +48,7 @@ exports.signup = (req, res) => {
 
 
         }else {
-
+/*
             Role.findOne({
                 where : {
                     name : 'customer'
@@ -55,15 +61,15 @@ exports.signup = (req, res) => {
                     })
                 })       
             })
-
-            /**another way of else part
-             * user.setRoles([1]).then(()=>{
+*/
+            //another way of else part
+              User.setRoles([1]).then(()=>{
                     console.log("registration completed")
                     res.status(201).send({
                         message : "User successfully registered"
-             * })
-             * })
-             */
+              })
+              })
+             
 
         }
     }).catch(err=>{
@@ -76,3 +82,43 @@ exports.signup = (req, res) => {
 
 
 }
+
+
+
+
+//Handler for signin
+
+
+exports.signin = (req,res)=>{
+
+    User.findOne({
+        where : {
+            email : req.body.email
+        }
+    }).then(user =>{
+        if(!user){
+            res.status(404).send({
+                message : "User not found"
+            })
+            return;
+        }
+
+        var passwordIsValid = bcrypt.compareSync(
+            req.body.password,
+            user.password
+        );
+
+        if(!passwordIsValid){
+            res.status(401).send({
+                message : "Invalid password"
+            })
+        }
+
+        var token = jwt.sign({id : user.id} ,secretKey.secret,{
+            expiresIn : 300
+        } )
+
+    })
+    
+}
+
