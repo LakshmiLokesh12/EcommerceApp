@@ -1,10 +1,8 @@
 //contains the schema details of user
 module.exports = ( sequelize, Sequelize ) => {
-    const User = sequelize.define("user",{
-        id : {
-            type : Sequelize.INTEGER,
-            primaryKey : true
-        },
+    
+    const User = sequelize.define("users",{
+        
         username : {
             type : Sequelize.STRING
         },
@@ -19,4 +17,4 @@ module.exports = ( sequelize, Sequelize ) => {
 
     return User;
 
-}
+};

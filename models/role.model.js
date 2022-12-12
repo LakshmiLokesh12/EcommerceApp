@@ -1,4 +1,5 @@
 module.exports = (sequelize, Sequelize) =>{
+
     const Role = sequelize.define("roles",{
         id :{
             type : Sequelize.INTEGER,
@@ -8,5 +9,7 @@ module.exports = (sequelize, Sequelize) =>{
             type : Sequelize.STRING
         }
     });
+
     return Role;
+    
 }
