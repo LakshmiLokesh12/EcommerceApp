@@ -78,7 +78,7 @@ function init() {
 require("./routes/category.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/auth.routes")(app);
-
+require("./routes/cart.routes")(app);
 
 app.listen(process.env.PORT, () => {
   console.log("Application started on port no :", serverConfig.PORT);

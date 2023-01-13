@@ -39,6 +39,22 @@ db.user.belongsToMany(db.role, {
     otherKey : "roleId"
 })
 
+//relation between user &cart 1-many
+//cart and product is many to many
+db.user.hasMany(db.cart);
+db.product.belongsToMany(db.cart, {
+    through : "cart_products",
+    foreignKey : "productId",
+    otherkey : "cartId"
+});
+db.cart.belongsToMany(db.product,{
+    through : "cart_products",
+    foreignKey : "cartId",
+    otherKey : "productId"
+})
+
+
+
 db.ROLES = ["customer" , "admin"]
 
 module.exports = db;
