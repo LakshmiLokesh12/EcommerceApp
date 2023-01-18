@@ -4,7 +4,7 @@
   "description": "\"This is an Ecommerse Application\"",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "LakshmiLokesh",
   "license": "ISC",
