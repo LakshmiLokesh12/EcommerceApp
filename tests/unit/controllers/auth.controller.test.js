@@ -4,7 +4,7 @@ const AuthController = require('../../../controllers/auth.controller');
 const Models = require('../../../models');
 const UserModel = Models.user;
 const RoleModel = Models.role;
-const newUser = require('../../mockData/userData.json');
+const newUser = require('../../mockData/newUser.json');
 const userData = require('../../mockData/userData.json');
 const { mockRequest, mockResponse } = require("./interceptor");
 const bcrypt = require("bcryptjs");
@@ -61,7 +61,7 @@ describe('AuthController.signup', () => {
         //await expect(spyOnFindAll).not.toHaveBeenCalled();
         await expect(UserModel.create).toHaveBeenCalled();
         await expect(RoleModel.findAll).toHaveBeenCalledTimes(1);//in last test case
-        await expect(res.send).toHaveBeenCalledWith({ message: "User registered successfully!" });    
+        await expect(res.send).toHaveBeenCalledWith({ message: "User  successfully registered" });    
     });
 
     it('should return error message', async () => {

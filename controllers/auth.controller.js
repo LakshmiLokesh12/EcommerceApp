@@ -1,5 +1,5 @@
 //
-const bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 const { user } = require('../models');
 
 
@@ -9,7 +9,7 @@ const User = db.user;
 const Role = db.role;
 
 const Op = db.Sequelize.Op;
-const jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 const secretKey = require('../configs/secret.config.js');
 
 
@@ -42,8 +42,8 @@ exports.signup = (req, res) => {
                     console.log("registration completed")
                     res.status(201).send({
                         message : "User successfully registered"
-                    })
-                })
+                    });
+                });
 
             })
 
@@ -67,24 +67,25 @@ exports.signup = (req, res) => {
             //another way of else part
               user.setRoles([1]).then(()=>{
                     console.log("registration completed")
-                    res.status(201).send({
+                    res.send({
                         message : "User successfully registered"
-                     })
-
+                     });
+                    });
+                    }
               })
              
 
-        }
-    }).catch(err=>{
+    .catch(err=>{
         console.log("Error while creating user", err.message);
         res.status(500).send({
-            message : "Some internal error"
-        })
-    })
+            message : err.message
+        });
+    });
+}
     
 
 
-}
+
 
 
 
