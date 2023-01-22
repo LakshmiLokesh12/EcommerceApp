@@ -1,6 +1,6 @@
 //const jwt = require("jsonwebtoken");
-//const config = require('../../../configs/auth.config');
-const AuthController = require('../../../controllers/auth.controller');
+const config = require('../../../configs/secret.config');
+const authController = require('../../../controllers/auth.controller');
 const Models = require('../../../models');
 const UserModel = Models.user;
 const RoleModel = Models.role;
@@ -18,7 +18,7 @@ beforeEach(() =>{
     res = mockResponse();
 })
 
-describe('AuthController.signup', () => {
+describe('authController.signup', () => {
 
     beforeEach(() => {
         req.body = newUser;
@@ -36,7 +36,7 @@ describe('AuthController.signup', () => {
                                 .mockImplementation(() => Promise.resolve()
                                 );
 
-        await AuthController.signup(req, res);
+        await authController.signup(req, res);
         
         await expect(spyOnCreate).toHaveBeenCalled();
         await expect(spyOnFindAll).toHaveBeenCalled();

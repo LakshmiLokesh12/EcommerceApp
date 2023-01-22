@@ -1,6 +1,6 @@
 //
 var bcrypt = require('bcryptjs');
-const { user } = require('../models');
+//const { user } = require('../models');
 
 
 const db = require('../models');
@@ -45,7 +45,7 @@ exports.signup = (req, res) => {
                     });
                 });
 
-            })
+            });
 
 
 
