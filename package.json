@@ -4,11 +4,11 @@
   "description": "\"This is an Ecommerse Application\"",
   "main": "server.js",
   "scripts": {
+    "start" : "node server.js",
     "test": "jest"
   },
   "author": "LakshmiLokesh",
   "license": "ISC",
-  "start":"node server",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
